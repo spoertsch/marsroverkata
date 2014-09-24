@@ -13,4 +13,9 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover should not be Nil
   }
 
+  it should "have a grid" in {
+    val marsRover = new MarsRover()
+    marsRover.getGrid() shouldBe (0,0)
+  }
+
 }
