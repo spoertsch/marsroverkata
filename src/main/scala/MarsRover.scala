@@ -14,21 +14,21 @@
  *
  * Created by jst on 24.09.14.
  */
-class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPointY: Integer = 0, val direction: Direction = North()) {
+class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val direction: Direction = North()) {
 
-  require(startingPointX >= 0)
-  require(startingPointY >= 0)
+  require(startPosition.x >= 0)
+  require(startPosition.y >= 0)
 
-  require(startingPointX < grid.columns)
-  require(startingPointY < grid.rows)
+  require(startPosition.x < grid.columns)
+  require(startPosition.y < grid.rows)
 
-  var currentPosition = (startingPointX, startingPointY)
+  var currentPosition = startPosition
 
-  def getStartingPoint() : (Integer, Integer) = (startingPointX, startingPointY)
+  def getStartingPoint() : (Integer, Integer) = (startPosition.x, startPosition.y)
 
   def getGrid() : (Integer, Integer) = grid.getAsTupel()
 
   def getDirection() : Direction = direction
 
-  def getCurrentPosition() : (Integer, Integer) = currentPosition
+  def getCurrentPosition() : (Integer, Integer) = (currentPosition.x, currentPosition.y)
 }

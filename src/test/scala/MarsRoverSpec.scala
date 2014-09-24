@@ -1,6 +1,5 @@
 import org.scalatest._
 
-import scala.math.Ordered.orderingToOrdered
 
 /**
  * Test class for MarsRover
@@ -26,31 +25,31 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   }
 
   it should "have a non default starting point" in {
-    val marsRover = new MarsRover(Grid(), 1, 1)
+    val marsRover = new MarsRover(Grid(), Position(1, 1))
     marsRover.getStartingPoint() shouldBe (1, 1)
   }
 
   it should "not allow a negative x starting point" in {
     a[IllegalArgumentException] should be thrownBy {
-      new MarsRover(Grid(), -1, 1)
+      new MarsRover(Grid(), Position(-1, 1))
     }
   }
 
   it should "not allow a negative y starting point" in {
     a[IllegalArgumentException] should be thrownBy {
-      new MarsRover(Grid(), 1, -1)
+      new MarsRover(Grid(), Position(1, -1))
     }
   }
 
   it should "not allow a starting point x outside the defined grid" in {
     a[IllegalArgumentException] should be thrownBy {
-      new MarsRover(Grid(), 100, 0)
+      new MarsRover(Grid(), Position(100, 0))
     }
   }
 
   it should "not allow a starting point y outside the defined grid" in {
     a[IllegalArgumentException] should be thrownBy {
-      new MarsRover(Grid(), 0, 100)
+      new MarsRover(Grid(), Position(0, 100))
     }
   }
 
@@ -59,7 +58,7 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   }
 
   it should "take S as direction" in {
-    val marsRover = new MarsRover(Grid(), 0, 0, South())
+    val marsRover = new MarsRover(Grid(), Position(0,0), South())
     marsRover.getDirection() shouldBe South()
   }
 
