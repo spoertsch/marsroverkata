@@ -6,9 +6,15 @@ import org.scalatest.{Matchers, FlatSpec}
  * Created by jst on 24.09.14.
  */
 class GridSpec extends FlatSpec with Matchers {
-  "A Grid" should "have a default value of 100 for columns and rows" in {
+
+  "A Grid" should "return the grid as tuple (x,y)" in {
+    val grid = Grid(1,2)
+    grid.getAsTuple() shouldBe (1,2)
+  }
+
+  it should "have a default value of 100 for columns and rows" in {
     val grid = Grid()
-    grid.getAsTupel() shouldBe (100, 100)
+    grid.getAsTuple() shouldBe (100, 100)
   }
 
   it should "not allow a negative grid column count" in {

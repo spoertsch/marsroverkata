@@ -8,6 +8,6 @@ import org.scalatest.{Matchers, FlatSpec}
 class PositionSpec extends FlatSpec with Matchers {
   "Position" should "return the position as tupel (x,y)" in {
     val pos = Position(1, 2)
-    pos.getAsTupel() shouldBe (1, 2)
+    pos.getAsTuple() shouldBe (1, 2)
   }
 }
