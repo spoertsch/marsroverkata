@@ -66,10 +66,11 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover.getCurrentPosition().getAsTuple() shouldBe (0,0)
   }
 
-  // Default start pos (0,0) facing North, moving forward should move to (0,1)
+  // Default start pos (0,0) facing North, moving forward should move to (0,1) but not change direction
   it should "move forward" in new MarsRoverFixture {
     val newPos = marsRover.move(Array('f'))
     newPos.getAsTuple() shouldBe (0, 1)
+    marsRover.getCurrentDirection() shouldBe North()
   }
 
   it should "not move on an invalid character (only f,b,r,l allowed)" in new MarsRoverFixture {
@@ -77,11 +78,12 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     newPos.getAsTuple() shouldBe (0, 0)
   }
 
-  // Start pos (0,1) facing North, moving backward should move to (0,0)
+  // Start pos (0,1) facing North, moving backward should move to (0,0) but not change direction
   it should "move backward" in {
     val marsRover = new MarsRover(Grid(), Position(0,1))
     val newPos = marsRover.move(Array('b'))
     newPos.getAsTuple() shouldBe (0, 0)
+    marsRover.getCurrentDirection() shouldBe North()
   }
 
   it should "return the current direction" in new MarsRoverFixture {
