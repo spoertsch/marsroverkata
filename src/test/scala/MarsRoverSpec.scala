@@ -71,4 +71,9 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     val newPos = marsRover.move(Array('f'))
     newPos.getAsTuple() shouldBe (0, 1)
   }
+
+  it should "not move on an invalid character (only f,b,r,l allowed)" in new MarsRoverFixture {
+    val newPos = marsRover.move(Array('x'))
+    newPos.getAsTuple() shouldBe (0, 0)
+  }
 }
