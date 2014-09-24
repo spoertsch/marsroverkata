@@ -76,4 +76,11 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     val newPos = marsRover.move(Array('x'))
     newPos.getAsTuple() shouldBe (0, 0)
   }
+
+  // Start pos (0,1) facing North, moving backward should move to (0,0)
+  it should "move backward" in {
+    val marsRover = new MarsRover(Grid(), Position(0,1))
+    val newPos = marsRover.move(Array('b'))
+    newPos.getAsTuple() shouldBe (0, 0)
+  }
 }
