@@ -51,4 +51,7 @@ class MarsRoverSpec extends FlatSpec with Matchers {
       new MarsRover(Grid(), 0, 100)
     }
   }
+  it should "have a default direction (N)" in new MarsRoverFixture {
+    marsRover.getDirection() shouldBe "N"
+  }
 }
