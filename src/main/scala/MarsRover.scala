@@ -15,6 +15,7 @@
  * Created by jst on 24.09.14.
  */
 class MarsRover(val grid: Grid) {
+  def getStartingPoint() : (Integer, Integer) = ???
 
   def getGrid() : (Integer, Integer) = grid.getAsTupel()
 

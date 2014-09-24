@@ -19,5 +19,8 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover.getGrid() shouldBe (100,100)
   }
 
+  it should "have a default starting point" in new MarsRoverFixture {
+    marsRover.getStartingPoint() shouldBe (0,0)
+  }
 
 }
