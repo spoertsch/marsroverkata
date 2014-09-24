@@ -26,5 +26,5 @@ class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val
 
   def getCurrentPosition() : Position = currentPosition
 
-  def move(command: Char) : Position = ???
+  def move(command: Char) : Position = Position(0, 1)
 }
