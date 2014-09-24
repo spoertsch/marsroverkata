@@ -15,6 +15,9 @@
  * Created by jst on 24.09.14.
  */
 class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPointY: Integer = 0) {
+
+  require(startingPointX >= 0)
+
   def getStartingPoint() : (Integer, Integer) = (startingPointX, startingPointY)
 
   def getGrid() : (Integer, Integer) = grid.getAsTupel()
