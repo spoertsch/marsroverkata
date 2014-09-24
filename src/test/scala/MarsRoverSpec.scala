@@ -65,4 +65,10 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   it should "return the current position" in new MarsRoverFixture {
     marsRover.getCurrentPosition().getAsTuple() shouldBe (0,0)
   }
+
+  // Default start pos (0,0) facing North, moving forward should move to (0,1)
+  it should "move forward" in new MarsRoverFixture {
+    val newPos = marsRover.move('f')
+    newPos shouldBe (0, 1)
+  }
 }
