@@ -23,4 +23,9 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover.getStartingPoint() shouldBe (0,0)
   }
 
+  it should "have a non default starting point" in {
+    val marsRover = new MarsRover(Grid(), 1,1)
+    marsRover.getStartingPoint() shouldBe (1,1)
+  }
+
 }
