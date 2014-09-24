@@ -101,4 +101,11 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     newPos.getAsTuple() shouldBe (0, 2)
     marsRover.getCurrentDirection() shouldBe North()
   }
+
+  it should "handle multiple moving commands (as String)" in new MarsRoverFixture {
+    val newPos = marsRover.move("ffbf")
+    newPos.getAsTuple() shouldBe (0, 2)
+    marsRover.getCurrentDirection() shouldBe North()
+  }
+
 }

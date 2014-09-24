@@ -29,7 +29,9 @@ class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val
 
   def getCurrentDirection(): Direction = currentDirection
 
-  def move(command: Array[Char]) : Position = {
+  def move(command: String): Position = move(command.toCharArray)
+
+  def move(command: Array[Char]): Position = {
     command.foreach(_ match {
       case 'f' => currentPosition = Position(currentPosition.x, currentPosition.y + 1)
       case 'b' => currentPosition = Position(currentPosition.x, currentPosition.y - 1)
