@@ -19,4 +19,10 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover.getGrid() shouldBe (100,100)
   }
 
+  it should "not allow a negative grid column count" in {
+    a [IllegalArgumentException] should be thrownBy {
+      new MarsRover(-1, 100)
+    }
+  }
+
 }
