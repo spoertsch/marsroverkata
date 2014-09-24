@@ -1,4 +1,3 @@
-import collection.mutable.Stack
 import org.scalatest._
 
 /**
@@ -8,14 +7,16 @@ import org.scalatest._
  */
 class MarsRoverSpec extends FlatSpec with Matchers {
 
-  "A MarsRover" should "be created" in {
+  trait MarsRoverFixture {
     val marsRover = new MarsRover()
+  }
+
+  "A MarsRover" should "be created" in new MarsRoverFixture {
     marsRover should not be Nil
   }
 
-  it should "have a grid" in {
-    val marsRover = new MarsRover()
-    marsRover.getGrid() shouldBe (0,0)
+  it should "have a grid" in new MarsRoverFixture {
+    marsRover.getGrid() shouldBe (100,100)
   }
 
 }
