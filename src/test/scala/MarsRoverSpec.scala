@@ -25,4 +25,10 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     }
   }
 
+  it should "not allow a negative grid row count" in {
+    a [IllegalArgumentException] should be thrownBy {
+      new MarsRover(100, -1)
+    }
+  }
+
 }
