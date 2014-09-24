@@ -1,5 +1,7 @@
 import org.scalatest._
 
+import scala.math.Ordered.orderingToOrdered
+
 /**
  * Test class for MarsRover
  *
@@ -51,7 +53,15 @@ class MarsRoverSpec extends FlatSpec with Matchers {
       new MarsRover(Grid(), 0, 100)
     }
   }
+
   it should "have a default direction (N)" in new MarsRoverFixture {
     marsRover.getDirection() shouldBe "N"
   }
+
+  it should "take S as direction" in {
+    val marsRover = new MarsRover(Grid(), 0, 0, "S")
+    marsRover.getDirection() shouldBe "S"
+  }
+
+
 }

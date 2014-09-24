@@ -14,7 +14,7 @@
  *
  * Created by jst on 24.09.14.
  */
-class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPointY: Integer = 0) {
+class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPointY: Integer = 0, val direction: String = "N") {
 
   require(startingPointX >= 0)
   require(startingPointY >= 0)
@@ -26,5 +26,5 @@ class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPoi
 
   def getGrid() : (Integer, Integer) = grid.getAsTupel()
 
-  def getDirection() : String = "N"
+  def getDirection() : String = direction
 }
