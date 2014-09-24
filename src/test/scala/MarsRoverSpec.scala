@@ -148,4 +148,32 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover.getCurrentDirection() shouldBe East()
   }
 
+  it should "turn right (from North to East)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,0), North())
+    val newPos = marsRover.move("r")
+    newPos.getAsTuple() shouldBe (0, 0)
+    marsRover.getCurrentDirection() shouldBe East()
+  }
+
+  it should "turn right (from East to South)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,0), East())
+    val newPos = marsRover.move("r")
+    newPos.getAsTuple() shouldBe (0, 0)
+    marsRover.getCurrentDirection() shouldBe South()
+  }
+
+  it should "turn right (from South to West)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,0), South())
+    val newPos = marsRover.move("r")
+    newPos.getAsTuple() shouldBe (0, 0)
+    marsRover.getCurrentDirection() shouldBe West()
+  }
+
+  it should "turn right (from West to North)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,0), West())
+    val newPos = marsRover.move("r")
+    newPos.getAsTuple() shouldBe (0, 0)
+    marsRover.getCurrentDirection() shouldBe North()
+  }
+
 }
