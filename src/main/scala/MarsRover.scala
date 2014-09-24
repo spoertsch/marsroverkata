@@ -33,8 +33,18 @@ class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val
 
   def move(command: Array[Char]): Position = {
     command.foreach(_ match {
-      case 'f' => currentPosition = Position(currentPosition.x, currentPosition.y + 1)
-      case 'b' => currentPosition = Position(currentPosition.x, currentPosition.y - 1)
+      case 'f' => currentDirection match {
+        case North() => currentPosition = Position(currentPosition.x, currentPosition.y + 1)
+        case South() => currentPosition = Position(currentPosition.x, currentPosition.y - 1)
+        case West() => currentPosition = Position(currentPosition.x - 1, currentPosition.y)
+        case East() => currentPosition = Position(currentPosition.x + 1, currentPosition.y)
+      }
+      case 'b' => currentDirection match {
+        case North() => currentPosition = Position(currentPosition.x, currentPosition.y - 1)
+        case South() => currentPosition = Position(currentPosition.x, currentPosition.y + 1)
+        case West() => currentPosition = Position(currentPosition.x + 1, currentPosition.y)
+        case East() => currentPosition = Position(currentPosition.x - 1, currentPosition.y)
+      }
       case 'l' => currentDirection match {
         case North() => currentDirection = West()
         case West() => currentDirection = South()
