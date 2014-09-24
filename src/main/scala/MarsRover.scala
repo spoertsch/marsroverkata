@@ -42,6 +42,9 @@ class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val
         case East() => currentDirection = North()
         case _ =>
       }
+      case 'r' => currentDirection match {
+        case North() => currentDirection = East()
+      }
       case _ => currentPosition
     })
 
