@@ -94,4 +94,11 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover.move(Array('x'))
     marsRover.getCurrentDirection() shouldBe North()
   }
+
+  // Default start pos (0,0) facing North, moving 'ffbf' should move to (0, 2) but not change direction
+  it should "handle multiple moving commands" in new MarsRoverFixture {
+    val newPos = marsRover.move(Array('f', 'f', 'b', 'f'))
+    newPos.getAsTuple() shouldBe (0, 2)
+    marsRover.getCurrentDirection() shouldBe North()
+  }
 }
