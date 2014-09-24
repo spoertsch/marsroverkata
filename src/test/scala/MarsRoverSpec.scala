@@ -42,7 +42,7 @@ class MarsRoverSpec extends FlatSpec with Matchers {
 
   it should "not allow a starting point x outside the defined grid" in {
     a[IllegalArgumentException] should be thrownBy {
-      new MarsRover(Grid(), 1000, 0)
+      new MarsRover(Grid(), 100, 0)
     }
   }
 }
