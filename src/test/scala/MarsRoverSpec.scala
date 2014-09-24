@@ -189,4 +189,60 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     newPos.getAsTuple() shouldBe (2,0)
     marsRover.getCurrentDirection() shouldBe North()
   }
+
+  it should "move correctly move forward when looking North (y + 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,0), North())
+    val newPos = marsRover.move("f")
+    newPos.getAsTuple() shouldBe (0, 1)
+    marsRover.getCurrentDirection() shouldBe North()
+  }
+
+  it should "move correctly move forward when looking South (y - 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,5), South())
+    val newPos = marsRover.move("f")
+    newPos.getAsTuple() shouldBe (0, 4)
+    marsRover.getCurrentDirection() shouldBe South()
+  }
+
+  it should "move correctly move forward when looking East (x + 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,0), East())
+    val newPos = marsRover.move("f")
+    newPos.getAsTuple() shouldBe (1, 0)
+    marsRover.getCurrentDirection() shouldBe East()
+  }
+
+  it should "move correctly move forward when looking West (x - 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(5,0), West())
+    val newPos = marsRover.move("f")
+    newPos.getAsTuple() shouldBe (4, 0)
+    marsRover.getCurrentDirection() shouldBe West()
+  }
+
+  it should "move correctly move backward when looking North (y - 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,5), North())
+    val newPos = marsRover.move("b")
+    newPos.getAsTuple() shouldBe (0, 4)
+    marsRover.getCurrentDirection() shouldBe North()
+  }
+
+  it should "move correctly move backward when looking South (y + 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(0,0), South())
+    val newPos = marsRover.move("b")
+    newPos.getAsTuple() shouldBe (0, 1)
+    marsRover.getCurrentDirection() shouldBe South()
+  }
+
+  it should "move correctly move backward when looking East (x - 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(5,0), East())
+    val newPos = marsRover.move("b")
+    newPos.getAsTuple() shouldBe (4, 0)
+    marsRover.getCurrentDirection() shouldBe East()
+  }
+
+  it should "move correctly move backward when looking West (x + 1)" in {
+    val marsRover = new MarsRover(Grid(), Position(5,0), West())
+    val newPos = marsRover.move("b")
+    newPos.getAsTuple() shouldBe (6, 0)
+    marsRover.getCurrentDirection() shouldBe West()
+  }
 }
