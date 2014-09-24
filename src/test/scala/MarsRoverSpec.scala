@@ -55,12 +55,12 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   }
 
   it should "have a default direction (N)" in new MarsRoverFixture {
-    marsRover.getDirection() shouldBe "N"
+    marsRover.getDirection() shouldBe North()
   }
 
   it should "take S as direction" in {
-    val marsRover = new MarsRover(Grid(), 0, 0, "S")
-    marsRover.getDirection() shouldBe "S"
+    val marsRover = new MarsRover(Grid(), 0, 0, South())
+    marsRover.getDirection() shouldBe South()
   }
 
 
