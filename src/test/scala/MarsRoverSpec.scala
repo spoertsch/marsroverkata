@@ -31,4 +31,10 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     }
   }
 
+  it should "not allow zero column count" in {
+    a [IllegalArgumentException] should be thrownBy {
+      new MarsRover(0, 100)
+    }
+  }
+
 }
