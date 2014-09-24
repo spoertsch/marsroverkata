@@ -245,4 +245,10 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     newPos.getAsTuple() shouldBe (6, 0)
     marsRover.getCurrentDirection() shouldBe West()
   }
+
+  it should "Example: The rover is on a 100x100 grid at location (0, 0) and facing NORTH. The rover is given the commands \"ffrff\" and should end up at (2, 2)" in new MarsRoverFixture {
+    val newPos = marsRover.move("ffrff")
+    newPos.getAsTuple() shouldBe (2,2)
+    marsRover.getCurrentDirection() shouldBe East()
+  }
 }
