@@ -89,4 +89,9 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   it should "return the current direction" in new MarsRoverFixture {
     marsRover.getCurrentDirection() shouldBe North()
   }
+
+  it should "not change direction on an invalid character (only f,b,r,l allowed)" in new MarsRoverFixture {
+    marsRover.move(Array('x'))
+    marsRover.getCurrentDirection() shouldBe North()
+  }
 }
