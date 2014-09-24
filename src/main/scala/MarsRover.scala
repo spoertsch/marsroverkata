@@ -26,10 +26,10 @@ class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val
 
   def getCurrentPosition() : Position = currentPosition
 
-  def move(command: Char) : Position = {
-    command match {
+  def move(command: Array[Char]) : Position = {
+    command.foreach(_ match {
       case 'f' => currentPosition = Position(currentPosition.x, currentPosition.y + 1)
-    }
+    })
 
     currentPosition
   }
