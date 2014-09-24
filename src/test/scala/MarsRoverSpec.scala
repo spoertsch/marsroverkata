@@ -63,5 +63,7 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     marsRover.getDirection() shouldBe South()
   }
 
-
+  it should "return the current position" in new MarsRoverFixture {
+    marsRover.getCurrentPosition() shouldBe (0,0)
+  }
 }
