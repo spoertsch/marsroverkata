@@ -34,4 +34,9 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     }
   }
 
+  it should "not allow a negative y starting point" in {
+    a[IllegalArgumentException] should be thrownBy {
+      new MarsRover(Grid(), 1, -1)
+    }
+  }
 }
