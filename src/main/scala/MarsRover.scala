@@ -28,5 +28,5 @@ class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPoi
 
   def getDirection() : Direction = direction
 
-  def getCurrentPosition() : (Integer, Integer) = ???
+  def getCurrentPosition() : (Integer, Integer) = (0,0)
 }
