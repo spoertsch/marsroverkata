@@ -22,11 +22,13 @@ class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPoi
   require(startingPointX < grid.columns)
   require(startingPointY < grid.rows)
 
+  var currentPosition = (startingPointX, startingPointY)
+
   def getStartingPoint() : (Integer, Integer) = (startingPointX, startingPointY)
 
   def getGrid() : (Integer, Integer) = grid.getAsTupel()
 
   def getDirection() : Direction = direction
 
-  def getCurrentPosition() : (Integer, Integer) = (0,0)
+  def getCurrentPosition() : (Integer, Integer) = currentPosition
 }
