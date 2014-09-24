@@ -83,4 +83,8 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     val newPos = marsRover.move(Array('b'))
     newPos.getAsTuple() shouldBe (0, 0)
   }
+
+  it should "return the current direction" in new MarsRoverFixture {
+    marsRover.getCurrentDirection() shouldBe North()
+  }
 }
