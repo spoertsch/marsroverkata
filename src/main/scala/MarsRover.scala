@@ -20,7 +20,8 @@ class MarsRover(val grid: Grid, val startingPointX: Integer = 0, val startingPoi
   require(startingPointY >= 0)
 
   require(startingPointX < grid.columns)
-
+  require(startingPointY < grid.rows)
+  
   def getStartingPoint() : (Integer, Integer) = (startingPointX, startingPointY)
 
   def getGrid() : (Integer, Integer) = grid.getAsTupel()
