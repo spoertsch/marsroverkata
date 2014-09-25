@@ -14,7 +14,7 @@
  *
  * Created by jst on 24.09.14.
  */
-class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val direction: Direction = North()) {
+class MarsRover(val grid: Grid, val startPosition: Position = Position(0, 0), val direction: Direction = North()) {
 
   require(startPosition.x >= 0)
   require(startPosition.y >= 0)
@@ -32,18 +32,31 @@ class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val
   def move(command: String): Position = move(command.toCharArray)
 
   def move(command: Array[Char]): Position = {
+
+    def wrapPosition(x: Integer, y: Integer): Position = {
+      var tmpX = x
+      if (x >= grid.columns) tmpX = 0
+      if (x < 0) tmpX = grid.columns - 1
+
+      var tmpY = y
+      if (y >= grid.rows) tmpY = 0
+      if (y < 0) tmpY = grid.rows - 1
+
+      Position(tmpX, tmpY)
+    }
+
     command.foreach(_ match {
       case 'f' => currentDirection match {
-        case North() => currentPosition = Position(currentPosition.x, currentPosition.y + 1)
-        case South() => currentPosition = Position(currentPosition.x, currentPosition.y - 1)
-        case West() => currentPosition = Position(currentPosition.x - 1, currentPosition.y)
-        case East() => currentPosition = Position(currentPosition.x + 1, currentPosition.y)
+        case North() => currentPosition = wrapPosition(currentPosition.x, currentPosition.y + 1)
+        case South() => currentPosition = wrapPosition(currentPosition.x, currentPosition.y - 1)
+        case West() => currentPosition = wrapPosition(currentPosition.x - 1, currentPosition.y)
+        case East() => currentPosition = wrapPosition(currentPosition.x + 1, currentPosition.y)
       }
       case 'b' => currentDirection match {
-        case North() => currentPosition = Position(currentPosition.x, currentPosition.y - 1)
-        case South() => currentPosition = Position(currentPosition.x, currentPosition.y + 1)
-        case West() => currentPosition = Position(currentPosition.x + 1, currentPosition.y)
-        case East() => currentPosition = Position(currentPosition.x - 1, currentPosition.y)
+        case North() => currentPosition = wrapPosition(currentPosition.x, currentPosition.y - 1)
+        case South() => currentPosition = wrapPosition(currentPosition.x, currentPosition.y + 1)
+        case West() => currentPosition = wrapPosition(currentPosition.x + 1, currentPosition.y)
+        case East() => currentPosition = wrapPosition(currentPosition.x - 1, currentPosition.y)
       }
       case 'l' => currentDirection match {
         case North() => currentDirection = West()
@@ -64,4 +77,6 @@ class MarsRover(val grid: Grid, val startPosition: Position = Position(0,0), val
 
     currentPosition
   }
+
+
 }

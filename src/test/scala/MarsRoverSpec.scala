@@ -251,4 +251,33 @@ class MarsRoverSpec extends FlatSpec with Matchers {
     newPos.getAsTuple() shouldBe (2,2)
     marsRover.getCurrentDirection() shouldBe East()
   }
+
+  it should "wrap the x position to the number of grid columns if below zero" in {
+    val marsRover = new MarsRover(Grid(), Position(99, 0), West())
+    val newPos = marsRover.move("b")
+    newPos.getAsTuple() shouldBe (0, 0)
+    marsRover.getCurrentDirection() shouldBe West()
+  }
+
+  it should "wrap the x position to zero if greater than the number of grid columns" in {
+    val marsRover = new MarsRover(Grid(), Position(0, 0), West())
+    val newPos = marsRover.move("f")
+    newPos.getAsTuple() shouldBe (99, 0)
+    marsRover.getCurrentDirection() shouldBe West()
+  }
+
+  it should "wrap the y position to zero if greater than the number of grid rows" in {
+    val marsRover = new MarsRover(Grid(), Position(0, 99), North())
+    val newPos = marsRover.move("f")
+    newPos.getAsTuple() shouldBe (0, 0)
+    marsRover.getCurrentDirection() shouldBe North()
+  }
+
+  it should "wrap the y position to the number of grid rows if below zero" in {
+    val marsRover = new MarsRover(Grid(), Position(0, 0), North())
+    val newPos = marsRover.move("b")
+    newPos.getAsTuple() shouldBe (0, 99)
+    marsRover.getCurrentDirection() shouldBe North()
+  }
+
 }
