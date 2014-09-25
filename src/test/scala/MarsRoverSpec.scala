@@ -17,16 +17,16 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   }
 
   it should "have a default grid" in new MarsRoverFixture {
-    marsRover.grid.getAsTuple() shouldBe (100, 100)
+    marsRover.grid shouldBe Grid(100, 100)
   }
 
   it should "have a default starting point" in new MarsRoverFixture {
-    marsRover.startPosition.getAsTuple() shouldBe (0, 0)
+    marsRover.startPosition shouldBe Position(0, 0)
   }
 
   it should "have a non default starting point" in {
     val marsRover = new MarsRover(Grid(), Position(1, 1))
-    marsRover.startPosition.getAsTuple() shouldBe (1, 1)
+    marsRover.startPosition shouldBe Position(1, 1)
   }
 
   it should "not allow a negative x starting point" in {
@@ -63,27 +63,25 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   }
 
   it should "return the current position" in new MarsRoverFixture {
-    marsRover.getCurrentPosition().getAsTuple() shouldBe (0,0)
+    marsRover.getCurrentPosition() shouldBe Position(0,0)
   }
 
   // Default start pos (0,0) facing North, moving forward should move to (0,1) but not change direction
   it should "move forward" in new MarsRoverFixture {
     val newPos = marsRover.move(Array('f'))
-    newPos.getAsTuple() shouldBe (0, 1)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 1), North())
   }
 
   it should "not move on an invalid character (only f,b,r,l allowed)" in new MarsRoverFixture {
     val newPos = marsRover.move(Array('x'))
-    newPos.getAsTuple() shouldBe (0, 0)
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), North())
   }
 
   // Start pos (0,1) facing North, moving backward should move to (0,0) but not change direction
   it should "move backward" in {
     val marsRover = new MarsRover(Grid(), Position(0,1))
     val newPos = marsRover.move(Array('b'))
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), North())
   }
 
   it should "return the current direction" in new MarsRoverFixture {
@@ -98,152 +96,130 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   // Default start pos (0,0) facing North, moving 'ffbf' should move to (0, 2) but not change direction
   it should "handle multiple moving commands" in new MarsRoverFixture {
     val newPos = marsRover.move(Array('f', 'f', 'b', 'f'))
-    newPos.getAsTuple() shouldBe (0, 2)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 2), North())
   }
 
   it should "handle multiple moving commands (as String)" in new MarsRoverFixture {
     val newPos = marsRover.move("ffbf")
-    newPos.getAsTuple() shouldBe (0, 2)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 2), North())
   }
 
   it should "turn left from default position" in new MarsRoverFixture {
     val newPos = marsRover.move("l")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe West()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), West())
   }
 
   it should "turn left (from North to West)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), North())
     val newPos = marsRover.move("l")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe West()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), West())
   }
 
   it should "turn left (from West to South)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), West())
     val newPos = marsRover.move("l")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe South()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), South())
   }
 
   it should "turn left (from South to East)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), South())
     val newPos = marsRover.move("l")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe East()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), East())
   }
 
   it should "turn left (from East to North)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), East())
     val newPos = marsRover.move("l")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), North())
   }
 
   it should "turn right from default position" in new MarsRoverFixture {
     val newPos = marsRover.move("r")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe East()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), East())
   }
 
   it should "turn right (from North to East)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), North())
     val newPos = marsRover.move("r")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe East()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), East())
   }
 
   it should "turn right (from East to South)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), East())
     val newPos = marsRover.move("r")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe South()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), South())
   }
 
   it should "turn right (from South to West)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), South())
     val newPos = marsRover.move("r")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe West()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), West())
   }
 
   it should "turn right (from West to North)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), West())
     val newPos = marsRover.move("r")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), North())
   }
 
   // North -> West -> South -> West -> South -> East
   it should "handle multiple turns" in new MarsRoverFixture {
     val newPos = marsRover.move("llrll")
-    newPos.getAsTuple() shouldBe (0,0)
-    marsRover.getCurrentDirection() shouldBe East()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), East())
   }
 
   // (0,0)N -> (0,1)N -> (0,1)E -> (1,1)E -> (2,1)E -> (2,1)N -> (2,0)N
   it should "handle mixed commands (turns and movements)" in new MarsRoverFixture {
     val newPos = marsRover.move("frfflb")
-    newPos.getAsTuple() shouldBe (2,0)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(2, 0), North())
   }
 
   it should "move correctly move forward when looking North (y + 1)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), North())
     val newPos = marsRover.move("f")
-    newPos.getAsTuple() shouldBe (0, 1)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 1), North())
   }
 
   it should "move correctly move forward when looking South (y - 1)" in {
     val marsRover = new MarsRover(Grid(), Position(0,5), South())
     val newPos = marsRover.move("f")
-    newPos.getAsTuple() shouldBe (0, 4)
-    marsRover.getCurrentDirection() shouldBe South()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 4), South())
   }
 
   it should "move correctly move forward when looking East (x + 1)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), East())
     val newPos = marsRover.move("f")
-    newPos.getAsTuple() shouldBe (1, 0)
-    marsRover.getCurrentDirection() shouldBe East()
+    checkPositionAndDirection(marsRover, newPos, Position(1, 0), East())
   }
 
   it should "move correctly move forward when looking West (x - 1)" in {
     val marsRover = new MarsRover(Grid(), Position(5,0), West())
     val newPos = marsRover.move("f")
-    newPos.getAsTuple() shouldBe (4, 0)
-    marsRover.getCurrentDirection() shouldBe West()
+    checkPositionAndDirection(marsRover, newPos, Position(4, 0), West())
   }
 
   it should "move correctly move backward when looking North (y - 1)" in {
     val marsRover = new MarsRover(Grid(), Position(0,5), North())
     val newPos = marsRover.move("b")
-    newPos.getAsTuple() shouldBe (0, 4)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 4), North())
   }
 
   it should "move correctly move backward when looking South (y + 1)" in {
     val marsRover = new MarsRover(Grid(), Position(0,0), South())
     val newPos = marsRover.move("b")
-    newPos.getAsTuple() shouldBe (0, 1)
-    marsRover.getCurrentDirection() shouldBe South()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 1), South())
   }
 
   it should "move correctly move backward when looking East (x - 1)" in {
     val marsRover = new MarsRover(Grid(), Position(5,0), East())
     val newPos = marsRover.move("b")
-    newPos.getAsTuple() shouldBe (4, 0)
-    marsRover.getCurrentDirection() shouldBe East()
+    checkPositionAndDirection(marsRover, newPos, Position(4, 0), East())
   }
 
   it should "move correctly move backward when looking West (x + 1)" in {
     val marsRover = new MarsRover(Grid(), Position(5,0), West())
     val newPos = marsRover.move("b")
-    newPos.getAsTuple() shouldBe (6, 0)
-    marsRover.getCurrentDirection() shouldBe West()
+    checkPositionAndDirection(marsRover, newPos, Position(6, 0), West())
   }
 
   it should "Example: The rover is on a 100x100 grid at location (0, 0) and facing NORTH. The rover is given the commands \"ffrff\" and should end up at (2, 2)" in new MarsRoverFixture {
@@ -255,29 +231,31 @@ class MarsRoverSpec extends FlatSpec with Matchers {
   it should "wrap the x position to the number of grid columns if below zero" in {
     val marsRover = new MarsRover(Grid(), Position(99, 0), West())
     val newPos = marsRover.move("b")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe West()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), West())
   }
 
   it should "wrap the x position to zero if greater than the number of grid columns" in {
     val marsRover = new MarsRover(Grid(), Position(0, 0), West())
     val newPos = marsRover.move("f")
-    newPos.getAsTuple() shouldBe (99, 0)
-    marsRover.getCurrentDirection() shouldBe West()
+    checkPositionAndDirection(marsRover, newPos, Position(99, 0), West())
   }
 
   it should "wrap the y position to zero if greater than the number of grid rows" in {
     val marsRover = new MarsRover(Grid(), Position(0, 99), North())
     val newPos = marsRover.move("f")
-    newPos.getAsTuple() shouldBe (0, 0)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 0), North())
   }
 
   it should "wrap the y position to the number of grid rows if below zero" in {
     val marsRover = new MarsRover(Grid(), Position(0, 0), North())
     val newPos = marsRover.move("b")
-    newPos.getAsTuple() shouldBe (0, 99)
-    marsRover.getCurrentDirection() shouldBe North()
+    checkPositionAndDirection(marsRover, newPos, Position(0, 99), North())
+  }
+
+  private def checkPositionAndDirection(marsRover: MarsRover, movedPos: Position, expectedPos: Position, expectedDir: Direction) = {
+    movedPos shouldBe expectedPos
+    marsRover.getCurrentDirection() shouldBe expectedDir
+    marsRover.getCurrentPosition() shouldBe expectedPos
   }
 
 }
